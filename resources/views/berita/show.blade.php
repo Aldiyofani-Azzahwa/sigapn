@@ -1,0 +1,1 @@
+<x-app-layout><div class="rounded-3xl bg-white p-6 shadow"><h1>{{ $berita->judul }}</h1><p>{{ $berita->isi }}</p></div></x-app-layout>

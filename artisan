@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+use Illuminate\Foundation\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+if (! file_exists(__DIR__.'/vendor/autoload.php')) {
+    echo "Jalankan composer install terlebih dahulu.".PHP_EOL;
+    exit(1);
+}
+
+require __DIR__.'/vendor/autoload.php';
+
+/** @var Application $app */
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+$status = $app->handleCommand(new ArgvInput);
+exit($status);

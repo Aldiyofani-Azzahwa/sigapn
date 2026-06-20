@@ -1,0 +1,1 @@
+<x-app-layout><div class="rounded-3xl bg-white p-6 shadow dark:bg-slate-900"><h1 class="text-3xl font-black">{{ $anggota->nama_lengkap }}</h1><p>{{ $anggota->nia }}</p><p>{{ $anggota->kampus?->nama_kampus }}</p></div></x-app-layout>

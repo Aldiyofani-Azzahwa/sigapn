@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --pn-primary:#0F5132; --pn-secondary:#198754; --pn-gold:#D4AF37; }
+html { scroll-behavior: smooth; }
+.glass-card { background: rgba(255,255,255,.86); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.35); }
+.dark .glass-card { background: rgba(15,23,42,.82); border: 1px solid rgba(148,163,184,.18); }
+.pn-gradient { background: linear-gradient(135deg,#0F5132 0%,#198754 55%,#D4AF37 120%); }
+.sidebar-scroll::-webkit-scrollbar { width:6px; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background:rgba(212,175,55,.45); border-radius:999px; }

@@ -1,0 +1,1 @@
+<x-app-layout><div class="rounded-3xl bg-white p-10 text-center shadow dark:bg-slate-900"><h1 class="text-3xl font-black">{{ $title }}</h1><p class="mt-3 text-slate-500">{{ $message }}</p></div></x-app-layout>

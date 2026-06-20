@@ -1,0 +1,1 @@
+<x-app-layout><div class="rounded-3xl bg-white p-6 shadow"><h1>{{ $kegiatan->nama_kegiatan }}</h1></div></x-app-layout>
