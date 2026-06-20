@@ -1,5 +1,9 @@
 <?php
 
-return [
-    App\Providers\AppServiceProvider::class,
-];
+use Illuminate\Support\ServiceProvider;
+
+return ServiceProvider::defaultProviders()
+    ->merge([
+        App\Providers\AppServiceProvider::class,
+    ])
+    ->toArray();
