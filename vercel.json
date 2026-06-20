@@ -12,15 +12,19 @@
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/build/$1"
+            "dest": "/public/build/$1"
         },
         {
             "src": "/favicon.ico",
-            "dest": "/favicon.ico"
+            "dest": "/public/favicon.ico"
         },
         {
             "src": "/robots.txt",
-            "dest": "/robots.txt"
+            "dest": "/public/robots.txt"
+        },
+        {
+            "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|map))",
+            "dest": "/public/$1"
         },
         {
             "src": "/(.*)",
@@ -29,9 +33,9 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
         "LOG_CHANNEL": "errorlog",
-        "LOG_LEVEL": "debug",
+        "LOG_LEVEL": "error",
         "CACHE_STORE": "array",
         "QUEUE_CONNECTION": "sync",
         "SESSION_DRIVER": "database",
