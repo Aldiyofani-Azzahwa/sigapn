@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+
+define('LARAVEL_START', microtime(true));
+
 $runtimePaths = [
     'VIEW_COMPILED_PATH' => '/tmp/views',
     'APP_CONFIG_CACHE' => '/tmp/config.php',
@@ -21,4 +26,31 @@ foreach (['/tmp/views', '/tmp/cache'] as $dir) {
     }
 }
 
-require __DIR__ . '/../public/index.php';
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = require __DIR__ . '/../bootstrap/app.php';
+
+try {
+    $request = Request::capture();
+
+    $response = $app->handle(
+        $request,
+        HttpKernelInterface::MAIN_REQUEST,
+        false
+    );
+
+    $response->send();
+
+    if (method_exists($app, 'terminate')) {
+        $app->terminate($request, $response);
+    }
+} catch (Throwable $e) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=UTF-8');
+
+    echo "ERROR CLASS: " . get_class($e) . PHP_EOL;
+    echo "MESSAGE: " . $e->getMessage() . PHP_EOL;
+    echo "FILE: " . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
+    echo PHP_EOL;
+    echo $e->getTraceAsString();
+}
