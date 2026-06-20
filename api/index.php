@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
-define('LARAVEL_START', microtime(true));
-
-$runtimePaths = [
+$paths = [
     'VIEW_COMPILED_PATH' => '/tmp/views',
     'APP_CONFIG_CACHE' => '/tmp/config.php',
     'APP_EVENTS_CACHE' => '/tmp/events.php',
@@ -14,10 +13,10 @@ $runtimePaths = [
     'APP_SERVICES_CACHE' => '/tmp/services.php',
 ];
 
-foreach ($runtimePaths as $key => $value) {
-    $_ENV[$key] = $_ENV[$key] ?? $value;
-    $_SERVER[$key] = $_SERVER[$key] ?? $value;
-    putenv($key.'='.($_SERVER[$key] ?? $value));
+foreach ($paths as $key => $value) {
+    putenv($key.'='.$value);
+    $_ENV[$key] = $value;
+    $_SERVER[$key] = $value;
 }
 
 foreach (['/tmp/views', '/tmp/cache'] as $dir) {
@@ -26,31 +25,4 @@ foreach (['/tmp/views', '/tmp/cache'] as $dir) {
     }
 }
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$app = require __DIR__ . '/../bootstrap/app.php';
-
-try {
-    $request = Request::capture();
-
-    $response = $app->handle(
-        $request,
-        HttpKernelInterface::MAIN_REQUEST,
-        false
-    );
-
-    $response->send();
-
-    if (method_exists($app, 'terminate')) {
-        $app->terminate($request, $response);
-    }
-} catch (Throwable $e) {
-    http_response_code(500);
-    header('Content-Type: text/plain; charset=UTF-8');
-
-    echo "ERROR CLASS: " . get_class($e) . PHP_EOL;
-    echo "MESSAGE: " . $e->getMessage() . PHP_EOL;
-    echo "FILE: " . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
-    echo PHP_EOL;
-    echo $e->getTraceAsString();
-}
+require __DIR__ . '/../public/index.php';

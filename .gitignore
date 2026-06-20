@@ -10,3 +10,6 @@
 /.vscode
 .DS_Store
 /public/hot
+/bootstrap/cache/*.php
+!/bootstrap/cache/.gitignore
+/
