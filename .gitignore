@@ -12,4 +12,3 @@
 /public/hot
 /bootstrap/cache/*.php
 !/bootstrap/cache/.gitignore
-/
